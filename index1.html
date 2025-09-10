@@ -83,3 +83,110 @@ ${amount} ${from} = <b>${converted.toFixed(2)} ${to}</b>;
 </script>
 </body>
 </html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cake Order Bill - Pastel Theme</title>
+<style>
+body {
+font-family: "Segoe UI", sans-serif;
+background: linear-gradient(135deg, #ffe6e6, #fff7cc); /* Soft pastel gradient */
+color: #333333;
+display: flex; justify-content: center; align-items: center;
+min-height: 100vh; margin: 0;
+}
+.box {
+background: #ffffff;
+padding: 25px;
+border-radius: 18px;
+box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+width: 400px; text-align: center;
+animation: popUp 0.6s ease;
+color: #333333;
+}
+h2 { color: #ff6699; }
+select, input, button {
+width: 90%; padding: 10px; margin: 8px 0;
+border-radius: 10px; border: 1px solid #ccc;
+background: #fffaf0; color: #333; font-size: 15px;
+}
+option { color: #333; background: #fffaf0; }
+input::placeholder { color: #888; }
+button {
+background: #ff6699; color: #fff; border: none;
+font-weight: bold; cursor: pointer; transition: 0.3s;
+border-radius: 10px; padding: 10px;
+}
+button:hover { background: #e64d82; }
+#bill {
+margin-top: 15px; font-size: 16px; font-weight: bold; color: #cc6600;
+}
+@keyframes popUp { from {transform:scale(0.8); opacity:0;} to {transform:scale(1); opacity:1;} }
+</style>
+</head>
+<body>
+<div class="box">
+<h2>
+Cake Order Bill</h2>
+
+<select id="cakeType">
+<option value="Black Forest">Black Forest - ₹500</option>
+<option value="Chocolate">Chocolate - ₹600</option>
+<option value="Vanilla">Vanilla - ₹400</option>
+<option value="Red Velvet">Red Velvet - ₹700</option>
+<option value="Strawberry">Strawberry - ₹550</option>
+
+<option value="Pineapple">Pineapple - ₹450</option>
+<option value="Butterscotch">Butterscotch - ₹650</option>
+<option value="Blueberry">Blueberry - ₹750</option>
+<option value="Mango Delight">Mango Delight - ₹500</option>
+<option value="Oreo Fantasy">Oreo Fantasy - ₹800</option>
+</select>
+
+<input type="number" id="qty" value="1" min="1" placeholder="Enter quantity">
+
+<button onclick="calculateBill()">Calculate Bill</button>
+<div id="bill"></div>
+</div>
+
+<script>
+const prices = {
+"Black Forest": 500,
+"Chocolate": 600,
+"Vanilla": 400,
+"Red Velvet": 700,
+"Strawberry": 550,
+"Pineapple": 450,
+"Butterscotch": 650,
+"Blueberry": 750,
+"Mango Delight": 500,
+"Oreo Fantasy": 800
+};
+
+function calculateBill() {
+let cake = document.getElementById("cakeType").value;
+let qty = parseInt(document.getElementById("qty").value);
+
+if (isNaN(qty) || qty <= 0) {
+document.getElementById("bill").innerHTML = "
+
+Invalid quantity!";
+
+return;
+}
+
+let total = prices[cake] * qty;
+document.getElementById("bill").innerHTML =
+Cake: ${cake}<br>
+
+Quantity: ${qty}<br>
+
+Total: <b>₹${total}</b>;
+
+}
+</script>
+</body>
+</html>
